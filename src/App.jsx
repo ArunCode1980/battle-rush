@@ -176,6 +176,63 @@ function Lobby({ onPlay }) {
 
       <div className="lobby-overlay" />
 
+      <div className="lobby-currency-bar">
+  <div className="lobby-player-mini">
+    <div className="lobby-player-avatar">K</div>
+
+    <div>
+      <strong>KAI</strong>
+      <span>LV. 1</span>
+    </div>
+  </div>
+
+  <div className="lobby-currency">
+    <div>
+      <span>GOLD</span>
+      <strong>0</strong>
+    </div>
+
+    <div>
+      <span>DIAMONDS</span>
+      <strong>0</strong>
+    </div>
+  </div>
+</div>
+
+<div className="lobby-side-menu">
+  <button>
+    <b>⚡</b>
+    <span>EVENTS</span>
+  </button>
+
+  <button>
+    <b>◈</b>
+    <span>STORE</span>
+  </button>
+
+  <button>
+    <b>◆</b>
+    <span>ROYALE</span>
+  </button>
+
+  <button>
+    <b>★</b>
+    <span>MISSIONS</span>
+  </button>
+</div>
+
+<div className="lobby-event-card">
+  <span className="lobby-event-tag">LIVE EVENT</span>
+
+  <strong>SEASON ZERO</strong>
+
+  <p>
+    Prepare for the first BATTLE RUSH season.
+  </p>
+
+  <button>VIEW EVENT</button>
+</div>
+
       <div className="lobby-top">
         <div>
           <div className="lobby-logo-small">

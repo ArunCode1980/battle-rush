@@ -1599,3 +1599,869 @@ button {
     font-size: 5px;
   }
 }
+
+/* =========================================================
+   MODE SELECT
+   NEW ADDITION ONLY
+========================================================= */
+
+.mode-select-overlay {
+  position: absolute;
+  inset: 0;
+
+  z-index: 100;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: rgba(2, 7, 4, 0.68);
+
+  backdrop-filter: blur(8px);
+}
+
+.mode-select-panel {
+  position: relative;
+
+  width: min(650px, 85vw);
+
+  padding: 30px;
+
+  border: 1px solid rgba(103, 230, 165, 0.18);
+  border-radius: 12px;
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(8, 19, 12, 0.96),
+      rgba(4, 10, 7, 0.94)
+    );
+
+  box-shadow:
+    0 25px 80px rgba(0, 0, 0, 0.55),
+    0 0 40px rgba(103, 230, 165, 0.04);
+}
+
+.mode-select-close {
+  position: absolute;
+
+  top: 12px;
+  right: 14px;
+}
+
+.mode-select-close button {
+  width: 30px;
+  height: 30px;
+
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 6px;
+
+  background: rgba(255, 255, 255, 0.04);
+
+  color: #849288;
+
+  font-size: 20px;
+  line-height: 1;
+
+  cursor: pointer;
+}
+
+.mode-select-close button:hover {
+  color: white;
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.mode-select-label {
+  color: #67e6a5;
+
+  font-size: 8px;
+
+  font-weight: 900;
+
+  letter-spacing: 2.5px;
+}
+
+.mode-select-title {
+  margin-top: 5px;
+
+  color: #edf5ef;
+
+  font-size: 25px;
+
+  font-weight: 950;
+
+  letter-spacing: 2px;
+}
+
+.mode-select-options {
+  display: grid;
+
+  grid-template-columns:
+    repeat(3, 1fr);
+
+  gap: 10px;
+
+  margin-top: 25px;
+}
+
+.mode-card {
+  min-height: 105px;
+
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+  justify-content: center;
+
+  gap: 7px;
+
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 8px;
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(255, 255, 255, 0.045),
+      rgba(255, 255, 255, 0.015)
+    );
+
+  color: #aebbb2;
+
+  cursor: pointer;
+
+  transition:
+    transform 0.18s ease,
+    border-color 0.18s ease,
+    background 0.18s ease,
+    color 0.18s ease;
+}
+
+.mode-card:hover {
+  transform: translateY(-3px);
+
+  border-color: rgba(103, 230, 165, 0.45);
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(103, 230, 165, 0.12),
+      rgba(103, 230, 165, 0.035)
+    );
+
+  color: #eaf5ee;
+}
+
+.mode-card strong {
+  font-size: 17px;
+
+  font-weight: 950;
+
+  letter-spacing: 1.5px;
+}
+
+.mode-card span {
+  color: #66766c;
+
+  font-size: 7px;
+
+  font-weight: 800;
+
+  letter-spacing: 1.3px;
+}
+
+.mode-card:hover span {
+  color: #82b596;
+}
+
+.mode-selected-area {
+  margin-top: 20px;
+
+  padding-top: 17px;
+
+  border-top: 1px solid rgba(255, 255, 255, 0.07);
+
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  gap: 15px;
+}
+
+.mode-selected-area > div {
+  color: #66766c;
+
+  font-size: 7px;
+
+  font-weight: 800;
+
+  letter-spacing: 1.3px;
+}
+
+.mode-selected-area strong {
+  color: #67e6a5;
+
+  font-size: 14px;
+
+  letter-spacing: 1.5px;
+}
+
+.mode-confirm-button {
+  padding: 11px 18px;
+
+  border: 1px solid rgba(103, 230, 165, 0.45);
+  border-radius: 6px;
+
+  background:
+    linear-gradient(
+      180deg,
+      #67e6a5,
+      #3baa73
+    );
+
+  color: #07110b;
+
+  font-size: 8px;
+
+  font-weight: 1000;
+
+  letter-spacing: 1.2px;
+
+  cursor: pointer;
+
+  transition:
+    transform 0.18s ease,
+    filter 0.18s ease;
+}
+
+.mode-confirm-button:hover {
+  transform: translateY(-2px);
+  filter: brightness(1.08);
+}
+
+
+/* =========================================================
+   MODE SELECT - MOBILE LANDSCAPE
+========================================================= */
+
+@media (max-width: 700px) and (orientation: landscape) {
+
+  .mode-select-panel {
+    width: 80vw;
+
+    padding: 17px;
+  }
+
+  .mode-select-label {
+    font-size: 5px;
+  }
+
+  .mode-select-title {
+    margin-top: 3px;
+    font-size: 16px;
+  }
+
+  .mode-select-options {
+    gap: 6px;
+    margin-top: 12px;
+  }
+
+  .mode-card {
+    min-height: 65px;
+    gap: 4px;
+  }
+
+  .mode-card strong {
+    font-size: 10px;
+  }
+
+  .mode-card span {
+    font-size: 5px;
+  }
+
+  .mode-selected-area {
+    margin-top: 10px;
+    padding-top: 9px;
+  }
+
+  .mode-selected-area > div {
+    font-size: 5px;
+  }
+
+  .mode-selected-area strong {
+    font-size: 9px;
+  }
+
+  .mode-confirm-button {
+    padding: 7px 10px;
+    font-size: 5px;
+  }
+}
+
+/* =========================================================
+   BATTLE MODE SELECTOR
+   SOLO / DUO / SQUAD
+   ========================================================= */
+
+.lobby-mode-selector {
+  position: absolute;
+  z-index: 25;
+
+  left: 50%;
+  bottom: 108px;
+
+  transform: translateX(-50%);
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  gap: 7px;
+
+  pointer-events: auto;
+}
+
+.lobby-mode-label {
+  color: rgba(235, 245, 239, 0.72);
+
+  font-size: 8px;
+  font-weight: 900;
+
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+
+/* =========================
+   MODE OPTIONS
+   ========================= */
+
+.lobby-mode-options {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 7px;
+}
+
+
+/* =========================
+   INDIVIDUAL MODE CARD
+   ========================= */
+
+.lobby-mode-card {
+  width: 82px;
+  height: 67px;
+
+  padding: 6px 5px;
+
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  border-radius: 9px;
+
+  background: rgba(5, 13, 8, 0.76);
+
+  color: white;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  gap: 2px;
+
+  cursor: pointer;
+
+  backdrop-filter: blur(9px);
+  -webkit-backdrop-filter: blur(9px);
+
+  transition:
+    transform 0.18s ease,
+    background 0.18s ease,
+    border-color 0.18s ease,
+    box-shadow 0.18s ease;
+}
+
+
+/* Hover */
+
+.lobby-mode-card:hover {
+  transform: translateY(-2px);
+
+  border-color: rgba(103, 230, 165, 0.38);
+
+  background: rgba(10, 25, 16, 0.86);
+}
+
+
+/* Selected */
+
+.lobby-mode-card.active {
+  transform: translateY(-2px);
+
+  background: rgba(27, 65, 45, 0.90);
+
+  border-color: #67e6a5;
+
+  box-shadow:
+    0 0 0 1px rgba(103, 230, 165, 0.12),
+    0 0 18px rgba(103, 230, 165, 0.16);
+}
+
+
+/* =========================
+   MODE TITLE
+   ========================= */
+
+.lobby-mode-card strong {
+  margin-top: 1px;
+
+  color: #f0f7f2;
+
+  font-size: 9px;
+  font-weight: 900;
+
+  letter-spacing: 1.2px;
+}
+
+
+/* Player count */
+
+.lobby-mode-card small {
+  color: #819087;
+
+  font-size: 6px;
+  font-weight: 800;
+
+  letter-spacing: 0.8px;
+}
+
+.lobby-mode-card.active small {
+  color: #9be9bd;
+}
+
+
+/* =========================================================
+   MINI PLAYER FIGURES
+   ========================================================= */
+
+.mode-players {
+  height: 18px;
+
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+
+  gap: 4px;
+}
+
+
+/* Body */
+
+.mode-players span {
+  position: relative;
+
+  display: block;
+
+  width: 8px;
+  height: 10px;
+
+  border-radius: 3px 3px 2px 2px;
+
+  background: #718078;
+
+  transition:
+    background 0.18s ease,
+    transform 0.18s ease;
+}
+
+
+/* Head */
+
+.mode-players span::before {
+  content: "";
+
+  position: absolute;
+
+  width: 6px;
+  height: 6px;
+
+  left: 1px;
+  top: -6px;
+
+  border-radius: 50%;
+
+  background: #a9b7af;
+
+  transition:
+    background 0.18s ease;
+}
+
+
+/* Selected player */
+
+.lobby-mode-card.active .mode-players span {
+  background: #67e6a5;
+}
+
+.lobby-mode-card.active .mode-players span::before {
+  background: #d5ffe5;
+}
+
+
+/* =========================================================
+   DIFFERENT PLAYER ARRANGEMENTS
+   ========================================================= */
+
+/* SOLO */
+
+.mode-solo {
+  gap: 0;
+}
+
+
+/* DUO */
+
+.mode-duo {
+  gap: 5px;
+}
+
+
+/* SQUAD */
+
+.mode-squad {
+  gap: 3px;
+}
+
+
+/* =========================================================
+   SMALL ACTIVE ANIMATION
+   ========================================================= */
+
+.lobby-mode-card.active .mode-players span {
+  animation: miniPlayerIdle 1.8s ease-in-out infinite;
+}
+
+.lobby-mode-card.active .mode-players span:nth-child(2) {
+  animation-delay: 0.12s;
+}
+
+.lobby-mode-card.active .mode-players span:nth-child(3) {
+  animation-delay: 0.24s;
+}
+
+.lobby-mode-card.active .mode-players span:nth-child(4) {
+  animation-delay: 0.36s;
+}
+
+@keyframes miniPlayerIdle {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-1px);
+  }
+}
+
+
+/* =========================================================
+   MOBILE / SMALL SCREEN
+   ========================================================= */
+
+@media (max-width: 700px) {
+
+  .lobby-mode-selector {
+    bottom: 92px;
+
+    gap: 5px;
+  }
+
+  .lobby-mode-label {
+    font-size: 7px;
+    letter-spacing: 1.5px;
+  }
+
+  .lobby-mode-options {
+    gap: 5px;
+  }
+
+  .lobby-mode-card {
+    width: 68px;
+    height: 57px;
+
+    border-radius: 7px;
+  }
+
+  .lobby-mode-card strong {
+    font-size: 8px;
+  }
+
+  .lobby-mode-card small {
+    font-size: 5px;
+  }
+
+  .mode-players {
+    height: 16px;
+  }
+
+  .mode-players span {
+    width: 7px;
+    height: 9px;
+  }
+
+  .mode-players span::before {
+    width: 5px;
+    height: 5px;
+
+    left: 1px;
+    top: -5px;
+  }
+}
+
+
+/* =========================================================
+   LANDSCAPE MOBILE
+   ========================================================= */
+
+@media (max-width: 900px) and (orientation: landscape) {
+
+  .lobby-mode-selector {
+    bottom: 76px;
+  }
+
+  .lobby-mode-card {
+    width: 65px;
+    height: 52px;
+  }
+
+  .lobby-mode-label {
+    font-size: 6px;
+  }
+
+  .lobby-mode-card strong {
+    font-size: 7px;
+  }
+
+  .lobby-mode-card small {
+    font-size: 5px;
+  }
+
+  .mode-players {
+    height: 14px;
+  }
+}
+
+
+
+/* =========================================================
+   SMALL LOBBY MATCHMAKING TIMER
+   ========================================================= */
+
+.lobby-matchmaking-mini {
+  position: absolute;
+
+  z-index: 40;
+
+  right: 30px;
+  bottom: 88px;
+  left: auto;
+  transform: none;  
+
+  min-width: 150px;
+  height: 34px;
+
+  padding: 0 34px 0 10px;
+
+  border-radius: 7px;
+
+  background: rgba(7, 16, 10, 0.88);
+
+  border: 1px solid rgba(103, 230, 165, 0.28);
+
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+
+  box-shadow:
+    0 5px 18px rgba(0, 0, 0, 0.25),
+    0 0 12px rgba(103, 230, 165, 0.06);
+
+  display: flex;
+  align-items: center;
+
+  animation: lobbyMatchmakingAppear 0.18s ease-out;
+}
+
+
+/* =========================================================
+   MATCHING TEXT
+   ========================================================= */
+
+.lobby-matchmaking-info {
+  display: flex;
+  align-items: baseline;
+
+  gap: 5px;
+
+  white-space: nowrap;
+}
+
+.lobby-matchmaking-label {
+  color: #8c9b92;
+
+  font-size: 7px;
+  font-weight: 900;
+
+  letter-spacing: 1.3px;
+}
+
+.lobby-matchmaking-info strong {
+  color: #67e6a5;
+
+  font-size: 14px;
+  font-weight: 1000;
+
+  line-height: 1;
+
+  font-variant-numeric: tabular-nums;
+}
+
+.lobby-matchmaking-sec {
+  color: #718078;
+
+  font-size: 6px;
+  font-weight: 900;
+
+  letter-spacing: 0.8px;
+}
+
+
+/* =========================================================
+   MINI PROGRESS LINE
+   ========================================================= */
+
+.lobby-matchmaking-progress {
+  position: absolute;
+
+  left: 10px;
+  right: 10px;
+  bottom: 3px;
+
+  height: 2px;
+
+  overflow: hidden;
+
+  border-radius: 10px;
+
+  background: rgba(255, 255, 255, 0.07);
+}
+
+.lobby-matchmaking-progress > div {
+  height: 100%;
+
+  border-radius: 10px;
+
+  background: #67e6a5;
+
+  transition: width 0.8s linear;
+}
+
+
+/* =========================================================
+   CANCEL X
+   ========================================================= */
+
+.lobby-matchmaking-cancel {
+  position: absolute;
+
+  right: 7px;
+  top: 7px;
+
+  width: 19px;
+  height: 19px;
+
+  padding: 0;
+
+  border: 0;
+  border-radius: 50%;
+
+  background: rgba(255, 255, 255, 0.07);
+
+  color: #87958d;
+
+  font-size: 14px;
+  font-weight: 700;
+
+  line-height: 17px;
+
+  cursor: pointer;
+
+  transition:
+    background 0.15s ease,
+    color 0.15s ease;
+}
+
+
+
+
+/* =========================================================
+   APPEAR ANIMATION
+   ========================================================= */
+
+@keyframes lobbyMatchmakingAppear {
+  from {
+    opacity: 0;
+    transform: translateX(-50%) translateY(-4px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 700px) {
+
+  .lobby-matchmaking-mini {
+    right: 9px;
+    bottom: 50px;
+
+    min-width: 130px;
+    height: 30px;
+
+    padding-left: 8px;
+    padding-right: 29px;
+  }
+
+  .lobby-matchmaking-label {
+    font-size: 6px;
+  }
+
+  .lobby-matchmaking-info strong {
+    font-size: 12px;
+  }
+
+  .lobby-matchmaking-sec {
+    font-size: 5px;
+  }
+
+  .lobby-matchmaking-cancel {
+    width: 17px;
+    height: 17px;
+
+    right: 6px;
+    top: 6px;
+
+    font-size: 12px;
+    line-height: 15px;
+  }
+}
+
+

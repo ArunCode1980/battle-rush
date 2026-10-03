@@ -167,7 +167,10 @@ function StartScreen({ onStart }) {
   );
 }
 
-function Lobby({ onPlay }) {
+function Lobby({ onPlay,matchmakingTime,matchmakingTotal,onCancelMatchmaking, }) {
+
+  const [selectedMode, setSelectedMode] = useState("solo");
+
   return (
     <div className="lobby-screen">
       <div className="lobby-world">
@@ -175,6 +178,50 @@ function Lobby({ onPlay }) {
       </div>
 
       <div className="lobby-overlay" />
+
+      {matchmakingTime !== null && (
+  <div className="lobby-matchmaking-mini">
+
+    <div className="lobby-matchmaking-info">
+
+      <span className="lobby-matchmaking-label">
+        MATCHING
+      </span>
+
+      <strong>
+        {matchmakingTime}
+      </strong>
+
+      <span className="lobby-matchmaking-sec">
+        SEC
+      </span>
+
+    </div>
+
+    <div className="lobby-matchmaking-progress">
+      <div
+        style={{
+          width: `${
+            matchmakingTotal
+              ? ((matchmakingTotal - matchmakingTime) /
+                  matchmakingTotal) *
+                100
+              : 0
+          }%`,
+        }}
+      />
+    </div>
+
+    <button
+      className="lobby-matchmaking-cancel"
+      onClick={onCancelMatchmaking}
+      aria-label="Cancel matchmaking"
+    >
+      ×
+    </button>
+
+  </div>
+)}
 
       <div className="lobby-currency-bar">
   <div className="lobby-player-mini">
@@ -288,6 +335,65 @@ function Lobby({ onPlay }) {
       >
         PLAY
       </button>
+      <div className="lobby-mode-selector">
+
+  <div className="lobby-mode-label">
+    BATTLE MODE
+  </div>
+
+  <div className="lobby-mode-options">
+
+    <button
+      className={`lobby-mode-card ${
+        selectedMode === "solo" ? "active" : ""
+      }`}
+      onClick={() => setSelectedMode("solo")}
+    >
+      <div className="mode-players mode-solo">
+        <span>●</span>
+      </div>
+
+      <strong>SOLO</strong>
+      <small>1 PLAYER</small>
+    </button>
+
+
+    <button
+      className={`lobby-mode-card ${
+        selectedMode === "duo" ? "active" : ""
+      }`}
+      onClick={() => setSelectedMode("duo")}
+    >
+      <div className="mode-players mode-duo">
+        <span>●</span>
+        <span>●</span>
+      </div>
+
+      <strong>DUO</strong>
+      <small>2 PLAYERS</small>
+    </button>
+
+
+    <button
+      className={`lobby-mode-card ${
+        selectedMode === "squad" ? "active" : ""
+      }`}
+      onClick={() => setSelectedMode("squad")}
+    >
+      <div className="mode-players mode-squad">
+        <span>●</span>
+        <span>●</span>
+        <span>●</span>
+        <span>●</span>
+      </div>
+
+      <strong>SQUAD</strong>
+      <small>4 PLAYERS</small>
+    </button>
+
+  </div>
+
+</div>
     </div>
   );
 }
@@ -295,6 +401,9 @@ function Lobby({ onPlay }) {
 export default function App() {
   const [screen, setScreen] =
     useState("loading");
+
+    const [matchmakingTime, setMatchmakingTime] = useState(null);
+    const [matchmakingTotal, setMatchmakingTotal] = useState(null);
 
   const goToStart = () => {
     setScreen("start");
@@ -305,8 +414,48 @@ export default function App() {
   };
 
   const startMatchmaking = () => {
-    setScreen("waiting");
+    const randomTime =
+    Math.floor(Math.random() * 51) + 10;
+
+   setMatchmakingTotal(randomTime);
+   setMatchmakingTime(randomTime);
   };
+
+
+  const cancelMatchmaking = () => {
+  setMatchmakingTime(null);
+  setMatchmakingTotal(null);
+};
+
+
+useEffect(() => {
+  if (matchmakingTime === null) return;
+
+  const timer = setInterval(() => {
+    setMatchmakingTime((current) => {
+      if (current === null) {
+        return current;
+      }
+
+      if (current <= 1) {
+        clearInterval(timer);
+
+        setTimeout(() => {
+          setMatchmakingTime(null);
+          setMatchmakingTotal(null);
+          setScreen("waiting");
+        }, 400);
+
+        return 0;
+      }
+
+      return current - 1;
+    });
+  }, 1000);
+
+  return () => clearInterval(timer);
+}, [matchmakingTime]);
+
 
   const startGame = () => {
     setScreen("game");
@@ -329,10 +478,65 @@ export default function App() {
       {screen === "lobby" && (
         <Lobby
           onPlay={startMatchmaking}
+          matchmakingTime={matchmakingTime}
+          matchmakingTotal={matchmakingTotal}
+          onCancelMatchmaking={cancelMatchmaking}
         />
       )}
 
-      {screen === "waiting" && (
+
+    {screen === "matchmaking" && (
+  <div className="matchmaking-screen">
+
+    <div className="matchmaking-content">
+
+      <div className="matchmaking-label">
+        BATTLE RUSH
+      </div>
+
+      <div className="matchmaking-title">
+        MATCH FOUND
+      </div>
+
+      <div className="matchmaking-subtitle">
+        PREPARING BATTLEFIELD
+      </div>
+
+      <div className="matchmaking-timer">
+        <span>
+          {matchmakingTime}
+        </span>
+        <small>SEC</small>
+      </div>
+
+      <div className="matchmaking-progress">
+        <div
+          className="matchmaking-progress-fill"
+          style={{
+            width: `${
+              matchmakingTotal
+                ? ((matchmakingTotal - matchmakingTime) /
+                    matchmakingTotal) *
+                  100
+                : 0
+            }%`,
+          }}
+        />
+      </div>
+
+      <button
+        className="matchmaking-cancel"
+        onClick={cancelMatchmaking}
+      >
+        CANCEL
+      </button>
+
+    </div>
+
+  </div>
+)}
+
+       {screen === "waiting" && (
         <WaitingArena
           onMatchStart={startGame}
         />

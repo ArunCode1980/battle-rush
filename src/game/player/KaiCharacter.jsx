@@ -1,17 +1,34 @@
-import { useRef } from "react";
+import React, { useMemo, useRef, useSyncExternalStore } from "react";
 import * as THREE from "three";
 import { useFrame } from "@react-three/fiber";
 
 import AssaultRifle from "../weapons/AssaultRifle";
+import { CLOTHING_ITEMS } from "./clothingData";
+import {
+  getInventorySnapshot,
+  subscribeInventory,
+} from "../systems/playerInventory";
 
-export default function KaiCharacter({
+export default function KaiCharacter(
   moving = false,
   sprinting = false,
   shooting = false,
   reloading = false,
   aiming = false,
-  muzzleFlashId = 0,
-}) {
+  muzzleFlashId = 0
+) {
+
+const inventory = useSyncExternalStore(
+  subscribeInventory,
+  getInventorySnapshot,
+  getInventorySnapshot
+);
+
+const equippedClothing =
+  CLOTHING_ITEMS[inventory.equipped.clothing] ||
+  CLOTHING_ITEMS.kai_standard;
+
+  
   const group = useRef();
 
   const leftArm = useRef();
@@ -35,16 +52,16 @@ export default function KaiCharacter({
   const HAIR = "#171513";
   const HAIR_LIGHT = "#24201d";
 
-  const JACKET = "#26332d";
-  const JACKET_LIGHT = "#34453d";
+  const JACKET = equippedClothing.colors.jacket;
+  const JACKET_LIGHT = equippedClothing.colors.jacket;
 
-  const SHIRT = "#55645b";
+  const SHIRT = equippedClothing.colors.shirt;
 
-  const PANTS = "#1b2421";
-  const PANTS_LIGHT = "#27312d";
+  const PANTS = equippedClothing.colors.pants;
+  const PANTS_LIGHT = equippedClothing.colors.pants;
 
-  const BOOTS = "#111513";
-  const BOOT_SOLE = "#080a09";
+  const BOOTS = equippedClothing.colors.boots;
+  const BOOT_SOLE = equippedClothing.colors.boots;
 
   const STRAP = "#111513";
   const METAL = "#4d5652";
@@ -981,3 +998,5 @@ export default function KaiCharacter({
     </group>
   );
 }
+
+
